@@ -17,8 +17,8 @@ buildscript {
             androidxAppCompat : '1.1.0',
             materialDesign    : '1.1.0-beta01',
             androidxConstraint: '2.0.0-beta2',
-
             utilCodex         : '1.25.9',
+            retrofit          : '2.6.2',
 
             testRunner        : '1.2.0',
             espresso          : '3.2.0',
