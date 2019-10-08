@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core-network-api" />
             <option value="$PROJECT_DIR$/core-network-retrofit-impl" />
+            <option value="$PROJECT_DIR$/core-network-tmdblib-impl" />
             <option value="$PROJECT_DIR$/core-utils" />
           </set>
         </option>

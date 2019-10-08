@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         RetrofitNetworkModule::class,
+//        TMDBLibNetworkModule::class,
         ComponentDependenciesModule::class
     ]
 )

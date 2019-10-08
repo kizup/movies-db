@@ -7,6 +7,7 @@ android {
     compileSdkVersion rootProject.compile_sdk_version
     buildToolsVersion rootProject.build_tools_version
 
+
     defaultConfig {
         minSdkVersion rootProject.min_sdk_version
         targetSdkVersion rootProject.target_sdk_version
@@ -24,16 +25,15 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     implementation project(":core-network-api")
-
-    // Rx
-    implementation "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
 
     // Retrofit
     api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
@@ -42,12 +42,5 @@ dependencies {
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
-    implementation "com.google.dagger:dagger:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-}
-
-dependencies {
-    testImplementation "junit:junit:${versions.junit}"
-    androidTestImplementation "androidx.test:runner:${versions.testRunner}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
 }

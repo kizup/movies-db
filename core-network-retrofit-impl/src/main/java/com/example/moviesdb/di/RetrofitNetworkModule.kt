@@ -1,9 +1,9 @@
 package com.example.moviesdb.di
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
-import com.example.moviesdb.network.impl.retrofit.interceptors.AddApiKeyInterceptor
 import com.example.moviesdb.network.impl.retrofit.IApiService
 import com.example.moviesdb.network.impl.retrofit.TheMovieDBClientApiImpl
+import com.example.moviesdb.network.impl.retrofit.interceptors.AddApiKeyInterceptor
 import com.example.moviesdb.network.model.BASE_API_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

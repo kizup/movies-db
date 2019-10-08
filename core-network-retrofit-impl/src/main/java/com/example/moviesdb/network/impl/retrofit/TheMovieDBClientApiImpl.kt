@@ -2,8 +2,10 @@ package com.example.moviesdb.network.impl.retrofit
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.model.Movie
+import com.example.moviesdb.network.model.RETROFIT_IMPL
 import io.reactivex.Single
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 class TheMovieDBClientApiImpl(

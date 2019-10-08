@@ -34,14 +34,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(":core-utils")
+    api project(":core-utils")
 
     // Rx
-    implementation "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
-}
-
-dependencies {
-    testImplementation "junit:junit:${versions.junit}"
-    androidTestImplementation "androidx.test:runner:${versions.testRunner}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    api "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
 }

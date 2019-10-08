@@ -1,9 +1,10 @@
 package com.example.moviesdb.di
 
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(
-    modules = [RetrofitNetworkModule::class]
-)
-interface RetrofitNetworkComponent {
-}
+//@Component(
+//    modules = [RetrofitModule::class, RetrofitNetworkModule::class]
+//)
+//@Singleton
+//interface RetrofitNetworkComponent : CoreNetworkApiDependencies

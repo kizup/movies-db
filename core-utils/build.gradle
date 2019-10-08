@@ -62,7 +62,7 @@ dependencies {
 }
 
 dependencies {
-    testImplementation "junit:junit:${versions.junit}"
-    androidTestImplementation "androidx.test:runner:${versions.testRunner}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    testApi "junit:junit:${versions.junit}"
+    androidTestApi "androidx.test:runner:${versions.testRunner}"
+    androidTestApi "androidx.test.espresso:espresso-core:${versions.espresso}"
 }

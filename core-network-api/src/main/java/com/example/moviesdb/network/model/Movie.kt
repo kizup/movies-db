@@ -6,7 +6,7 @@ data class Movie(
     val posterPath: String?,
     val adult: Boolean,
     val overview: String?,
-    val releaseDate: Date,
+    val releaseDate: Date?,
     val genreIds: List<Int>,
     val id: Long,
     val originalTitle: String,
