@@ -1,6 +1,7 @@
-package com.example.moviesdb.di
+package com.example.moviesdb.movies.list.di
 
 import com.example.moviesdb.MainActivity
+import com.example.moviesdb.movies.list.api.MoviesListDependencies
 import com.example.moviesdb.utils.ComponentDependencies
 import com.example.moviesdb.utils.ComponentDependenciesKey
 import dagger.Binds
@@ -17,7 +18,7 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface AppComponent : CoreNetworkApiDependencies {
+interface AppComponent : CoreNetworkApiDependencies, MoviesListDependencies {
 
     fun inject(activity: MainActivity)
 
@@ -30,5 +31,10 @@ private abstract class ComponentDependenciesModule private constructor() {
     @IntoMap
     @ComponentDependenciesKey(CoreNetworkApiDependencies::class)
     abstract fun provideCoreNetworkApiDependencies(appComponent: AppComponent): ComponentDependencies
+
+    @Binds
+    @IntoMap
+    @ComponentDependenciesKey(MoviesListDependencies::class)
+    abstract fun provideMoviesListDependencies(appComponent: AppComponent): ComponentDependencies
 
 }

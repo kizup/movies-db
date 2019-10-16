@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/core-network-retrofit-impl" />
             <option value="$PROJECT_DIR$/core-network-tmdblib-impl" />
             <option value="$PROJECT_DIR$/core-utils" />
+            <option value="$PROJECT_DIR$/feature-movies-list" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

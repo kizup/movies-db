@@ -1,4 +1,4 @@
-package com.example.moviesdb.di
+package com.example.moviesdb.movies.list.di
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import dagger.Module

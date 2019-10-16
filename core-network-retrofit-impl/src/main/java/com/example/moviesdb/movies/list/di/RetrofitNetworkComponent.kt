@@ -1,7 +1,4 @@
-package com.example.moviesdb.di
-
-import dagger.Component
-import javax.inject.Singleton
+package com.example.moviesdb.movies.list.di
 
 //@Component(
 //    modules = [RetrofitModule::class, RetrofitNetworkModule::class]

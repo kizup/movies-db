@@ -1,4 +1,4 @@
-package com.example.moviesdb.di
+package com.example.moviesdb.movies.list.di
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.impl.retrofit.IApiService
@@ -13,7 +13,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

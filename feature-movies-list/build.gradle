@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -7,15 +7,15 @@ android {
     compileSdkVersion rootProject.compile_sdk_version
     buildToolsVersion rootProject.build_tools_version
 
+
     defaultConfig {
-        applicationId "com.example.moviesdb"
         minSdkVersion rootProject.min_sdk_version
         targetSdkVersion rootProject.target_sdk_version
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -25,22 +25,12 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
-    }
 }
 
 dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
     implementation project(":core-network-retrofit-impl")
-    implementation project(":core-network-tmdblib-impl")
-
-    implementation project(":feature-movies-list")
-
-    // Multidex
-    implementation "androidx.multidex:multidex:${versions.multidex}"
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'

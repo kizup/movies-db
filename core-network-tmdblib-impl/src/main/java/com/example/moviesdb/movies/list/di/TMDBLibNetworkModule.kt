@@ -1,9 +1,8 @@
-package com.example.moviesdb.di
+package com.example.moviesdb.movies.list.di
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.impl.TMDBLibClientApiImpl
 import com.example.moviesdb.network.model.API_KEY
-import com.example.moviesdb.network.model.TMDBLIB_IMPL
 import dagger.Module
 import dagger.Provides
 import info.movito.themoviedbapi.TmdbApi
