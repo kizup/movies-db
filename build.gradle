@@ -19,6 +19,8 @@ buildscript {
             androidxConstraint: '2.0.0-beta2',
             utilCodex         : '1.25.9',
             retrofit          : '2.6.2',
+            httpLogging       : '4.2.1',
+            fastAdapter       : '4.1.0',
 
             multidex          : '2.0.1',
 

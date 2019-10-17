@@ -13,7 +13,7 @@ class AddApiKeyInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
-        val originalHttpUrl = originalRequest.url()
+        val originalHttpUrl = originalRequest.url
 
         val url = originalHttpUrl.newBuilder()
             .addQueryParameter(API_KEY_QUERY, API_KEY)

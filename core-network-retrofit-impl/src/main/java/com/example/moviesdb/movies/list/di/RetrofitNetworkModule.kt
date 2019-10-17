@@ -1,6 +1,7 @@
 package com.example.moviesdb.movies.list.di
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
+import com.example.moviesdb.network.impl.retrofit.BuildConfig
 import com.example.moviesdb.network.impl.retrofit.IApiService
 import com.example.moviesdb.network.impl.retrofit.TheMovieDBClientApiImpl
 import com.example.moviesdb.network.impl.retrofit.interceptors.AddApiKeyInterceptor
@@ -10,6 +11,7 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -45,17 +47,32 @@ class RetrofitNetworkModule {
     @Singleton
     fun provideGson(): Gson {
         return GsonBuilder()
+            .setDateFormat("yyyy-MM-dd")
             .setPrettyPrinting()
             .create()
     }
 
     @Provides
     @Singleton
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+    }
+
+    @Provides
+    @Singleton
     fun provideHttpClient(
-        apiKeyInterceptor: AddApiKeyInterceptor
+        apiKeyInterceptor: AddApiKeyInterceptor,
+        httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder().let { builder ->
             builder.addInterceptor(apiKeyInterceptor)
+            builder.addInterceptor(httpLoggingInterceptor)
             return@let builder.build()
         }
     }

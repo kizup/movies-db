@@ -1,8 +1,10 @@
 package com.example.moviesdb.movies.list.presentation.mvp
 
+import com.example.moviesdb.movies.list.adapter.MovieItem
 import com.example.moviesdb.movies.list.presentation.view.IMoviesListView
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import javax.inject.Inject
@@ -20,11 +22,10 @@ class MoviesListPresenter @Inject constructor(
     private fun loadMoviesList() {
         launch { tmdbClient.loadPopularMovies()
             .subscribeOn(Schedulers.io())
-            .subscribe({
-                println()
-            }, {
-                println()
-            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ movies ->
+                viewState.addMovies(movies.map { MovieItem(it) })
+            }, this::handleError)
         }
     }
 

@@ -39,6 +39,7 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     api "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
     api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    api "com.squareup.okhttp3:logging-interceptor:${versions.httpLogging}"
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
