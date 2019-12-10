@@ -18,6 +18,10 @@ class HomePresenter @Inject constructor(
 
     }
 
+    // popular movies
+    // tv
+    // serials
+
     private fun loadNowPlayingMovies() {
         launch { tmdbClient.loadPopularMovies()
             .subscribeOn(Schedulers.io())

@@ -17,20 +17,11 @@ class TMDBLibClientApiImpl(
     }
 
     override fun loadNowPlayingMovies(page: Int): Single<List<Movie>> {
-        return Single.fromCallable {
-            tmdbApi.movies
-                .getNowPlayingMovies("ru", page, "")
-                .results
-                .map { it.toMovie() }
-        }
+        throw NotImplementedError()
     }
 
     override fun loadPopularMovies(page: Int): Single<List<Movie>> {
-        return Single.fromCallable {
-            tmdbApi.movies.getPopularMovies("ru", page)
-                .results
-                .map { movieDb -> movieDb.toMovie() }
-        }
+        throw NotImplementedError()
     }
 
     fun MovieDb.toMovie(): Movie {

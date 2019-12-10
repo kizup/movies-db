@@ -33,7 +33,7 @@ dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
     implementation project(":core-network-retrofit-impl")
-    implementation project(":feature-home-screen")
+    implementation project(':feature-home-tab')
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'

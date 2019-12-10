@@ -38,8 +38,8 @@ dependencies {
     implementation project(":core-network-tmdblib-impl")
 
     implementation project(":feature-movies-list")
-    implementation project(":feature-main-screen")
-    implementation project(":feature-home-screen")
+    implementation project(':feature-root-screen')
+    implementation project(':feature-home-tab')
 
     // Multidex
     implementation "androidx.multidex:multidex:${versions.multidex}"

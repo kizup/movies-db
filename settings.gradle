@@ -1,5 +1,5 @@
-include ':core-utils', ':feature-home-screen',
+include ':core-utils', ':feature-home-tab',
         ':app',
         ':core-network-api', ':core-network-retrofit-impl', ':core-network-tmdblib-impl',
-        ':feature-movies-list', ':feature-main-screen'
+        ':feature-movies-list', ':feature-root-screen'
 rootProject.name='MoviesDB'

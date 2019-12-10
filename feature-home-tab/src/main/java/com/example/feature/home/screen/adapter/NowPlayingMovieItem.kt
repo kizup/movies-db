@@ -15,7 +15,7 @@ class NowPlayingMovieItem(
     }
 
     override val layoutRes: Int
-        get() = R.layout.item_movie_home_tab
+        get() = R.layout.item_movie
 
     override val type: Int
         get() = 0
