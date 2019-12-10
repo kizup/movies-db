@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/core-network-retrofit-impl" />
             <option value="$PROJECT_DIR$/core-network-tmdblib-impl" />
             <option value="$PROJECT_DIR$/core-utils" />
+            <option value="$PROJECT_DIR$/feature-home-screen" />
+            <option value="$PROJECT_DIR$/feature-main-screen" />
             <option value="$PROJECT_DIR$/feature-movies-list" />
           </set>
         </option>

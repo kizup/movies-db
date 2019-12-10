@@ -7,4 +7,6 @@ interface MoviesListDependencies : ComponentDependencies {
 
     fun theMovieDbClient(): TheMovieDBClientApi
 
+    fun navigator(): MoviesListNavigator
+
 }

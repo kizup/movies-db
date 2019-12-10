@@ -14,6 +14,7 @@ import com.example.moviesdb.presentation.view.base.BaseFragment
 import com.example.moviesdb.utils.findComponentDependencies
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.listeners.addClickListener
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import moxy.ktx.moxyPresenter
 import moxy.presenter.InjectPresenter
@@ -39,6 +40,9 @@ class MoviesListFragment : BaseFragment<MoviesListPresenter>(), IMoviesListView 
         super.onViewCreated(view, savedInstanceState)
 
         val fastAdapter = FastAdapter.with(moviesAdapter)
+        fastAdapter.onClickListener = { view, adapter, item, position ->
+            presenter.onMovieClick(item)
+        }
 
         rvMoviesList.apply {
             layoutManager = LinearLayoutManager(context)

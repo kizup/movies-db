@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CoreMainFragment</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="trailers">Trailers</string>
+    <string name="account">Account</string>
+</resources>

@@ -38,6 +38,8 @@ dependencies {
     implementation project(":core-network-tmdblib-impl")
 
     implementation project(":feature-movies-list")
+    implementation project(":feature-main-screen")
+    implementation project(":feature-home-screen")
 
     // Multidex
     implementation "androidx.multidex:multidex:${versions.multidex}"
@@ -45,4 +47,10 @@ dependencies {
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Cicerone
+    implementation "ru.terrakok.cicerone:cicerone:${versions.cicerone}"
+
+    // Navigation
+    implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
 }

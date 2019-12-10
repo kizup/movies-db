@@ -14,4 +14,9 @@ interface IApiService {
         @Query("page") page: Int
     ): Single<PagingResponse<MovieResponse>>
 
+    @GET("/movie/now_playing")
+    fun loadNowPlayingMovies(
+        @Query("page") page: Int
+    ): Single<PagingResponse<MovieResponse>>
+
 }

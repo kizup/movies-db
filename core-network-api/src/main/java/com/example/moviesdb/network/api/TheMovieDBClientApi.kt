@@ -15,4 +15,15 @@ interface TheMovieDBClientApi {
         page: Int = 1
     ): Single<List<Movie>>
 
+
+    /**
+     * https://developers.themoviedb.org/3/movies/get-now-playing
+     *
+     * Get a list of movies in theatres
+     * @param page - page, minimum 1, maximum 1000,
+     */
+    fun loadNowPlayingMovies(
+        page: Int = 1
+    ): Single<List<Movie>>
+
 }

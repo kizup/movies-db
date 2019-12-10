@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:id="@+id/moviesListFragment"
-        android:name="com.example.moviesdb.movies.list.presentation.view.MoviesListFragment"
+        android:id="@+id/container"
+        android:name="com.example.core.main.fragment.presentation.view.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
