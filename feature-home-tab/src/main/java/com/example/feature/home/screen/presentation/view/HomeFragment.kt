@@ -16,6 +16,7 @@ import com.example.moviesdb.presentation.view.base.BaseFragment
 import com.example.moviesdb.presentation.view.base.IBaseView
 import com.example.moviesdb.utils.findComponentDependencies
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import moxy.ktx.moxyPresenter
 import moxy.viewstate.strategy.AddToEndSingleStrategy
@@ -40,7 +41,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
     val presenter: HomePresenter by moxyPresenter { lazyPresenter.get() }
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val groupAdapter: GroupAdapter<out GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
+    private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
 
     override val layoutId: Int
         get() = R.layout.fragment_home
