@@ -2,6 +2,7 @@ package com.example.moviesdb.network.impl
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.model.Movie
+import com.example.moviesdb.network.model.TvShow
 import info.movito.themoviedbapi.TmdbApi
 import info.movito.themoviedbapi.model.MovieDb
 import io.reactivex.Single
@@ -21,6 +22,22 @@ class TMDBLibClientApiImpl(
     }
 
     override fun loadPopularMovies(page: Int): Single<List<Movie>> {
+        throw NotImplementedError()
+    }
+
+    override fun loadTopRatedMovies(page: Int): Single<List<Movie>> {
+        throw NotImplementedError()
+    }
+
+    override fun loadUpcomingMovies(page: Int): Single<List<Movie>> {
+        throw NotImplementedError()
+    }
+
+    override fun loadTvTopRatedSerials(page: Int): Single<List<TvShow>> {
+        throw NotImplementedError()
+    }
+
+    override fun loadTvPopularSerials(page: Int): Single<List<TvShow>> {
         throw NotImplementedError()
     }
 

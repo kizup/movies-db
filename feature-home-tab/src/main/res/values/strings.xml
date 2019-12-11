@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">feature-home-screen</string>
+    <string name="view_all_title">Смотреть все</string>
+    <string name="popular_movies_title">Популярные фильмы</string>
+    <string name="now_playing_movies_title">Сейчас в кинотеатрах</string>
+    <string name="top_rated_movies_title">Самые популярные</string>
+    <string name="upcoming_movies_title">Скоро в кинотеатрах</string>
+    <string name="tv_title">ТВ</string>
 </resources>

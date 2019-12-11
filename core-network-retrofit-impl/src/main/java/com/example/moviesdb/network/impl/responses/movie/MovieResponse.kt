@@ -16,8 +16,8 @@ data class MovieResponse(
     @SerializedName("title") val title: String,
     @SerializedName("backdrop_path") val backdropPath: String?,
     @SerializedName("popularity") val popularity: Float,
-    @SerializedName("vote_count") val voteCount: Long,
     @SerializedName("video") val haveVideo: Boolean,
+    @SerializedName("vote_count") val voteCount: Long,
     @SerializedName("vote_average") val voteAverage: Float
 ) {
 

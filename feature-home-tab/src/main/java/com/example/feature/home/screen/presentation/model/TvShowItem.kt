@@ -5,21 +5,17 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.feature.home.screen.R
-import com.example.moviesdb.network.model.Movie
+import com.example.moviesdb.network.model.TvShow
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_movie.*
 
-class MovieItem(
-    private val movie: Movie
+class TvShowItem(
+    private val tvShow: TvShow
 ) : Item() {
 
-    override fun getId(): Long {
-        return movie.id
-    }
-
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        movie.posterPath?.let {
+        tvShow.posterPath?.let {
             val url = "https://image.tmdb.org/t/p/w400$it"
             Glide.with(viewHolder.ivCover)
                 .load(url)
@@ -31,4 +27,5 @@ class MovieItem(
     }
 
     override fun getLayout(): Int = R.layout.item_movie
+
 }

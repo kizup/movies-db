@@ -23,6 +23,7 @@ buildscript {
             fastAdapter       : '4.1.0',
             groupie           : '2.7.0',
             ahbottomnavigation: '2.3.4',
+            glide             : '4.10.0',
 
             multidex          : '2.0.1',
 

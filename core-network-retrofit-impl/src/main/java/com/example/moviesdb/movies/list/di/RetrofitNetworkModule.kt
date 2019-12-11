@@ -5,6 +5,7 @@ import com.example.moviesdb.network.impl.retrofit.BuildConfig
 import com.example.moviesdb.network.impl.retrofit.IApiService
 import com.example.moviesdb.network.impl.retrofit.TheMovieDBClientApiImpl
 import com.example.moviesdb.network.impl.retrofit.interceptors.AddApiKeyInterceptor
+import com.example.moviesdb.network.impl.retrofit.interceptors.AddCountryAndLanguageInterceptor
 import com.example.moviesdb.network.model.BASE_API_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -68,9 +69,11 @@ class RetrofitNetworkModule {
     @Singleton
     fun provideHttpClient(
         apiKeyInterceptor: AddApiKeyInterceptor,
+        languageAndCountryInterceptor: AddCountryAndLanguageInterceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder().let { builder ->
+            builder.addInterceptor(languageAndCountryInterceptor)
             builder.addInterceptor(apiKeyInterceptor)
             builder.addInterceptor(httpLoggingInterceptor)
             return@let builder.build()

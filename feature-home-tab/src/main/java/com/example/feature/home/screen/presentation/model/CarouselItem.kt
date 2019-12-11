@@ -1,18 +1,37 @@
 package com.example.feature.home.screen.presentation.model
 
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.feature.home.screen.R
+import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_carousel.*
 
 class CarouselItem(
-    private val movieItems: List<MovieItem>
+    private val movieItems: List<Item>
 ) : Item() {
 
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.rvCarousel.apply {
-            // TODO setup recycler view
+    private val moviesAdapter = GroupAdapter<GroupieViewHolder>()
+    private var linearLayoutManager: LinearLayoutManager? = null
+
+    override fun createViewHolder(itemView: View): GroupieViewHolder {
+        linearLayoutManager = LinearLayoutManager(itemView.context, RecyclerView.HORIZONTAL, false)
+        moviesAdapter.setHasStableIds(true)
+        return super.createViewHolder(itemView).apply {
+            rvCarousel.layoutManager = linearLayoutManager
+            rvCarousel.setHasFixedSize(true)
+            LinearSnapHelper().attachToRecyclerView(rvCarousel)
         }
+    }
+
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        viewHolder.rvCarousel.adapter = moviesAdapter
+        moviesAdapter.clear()
+        moviesAdapter.addAll(movieItems)
     }
 
     override fun getLayout(): Int = R.layout.item_carousel
