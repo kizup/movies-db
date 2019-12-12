@@ -68,37 +68,37 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
         data.apply {
             allMovies.apply {
                 groupAdapter += HeaderItem(getString(R.string.top_rated_movies_title))
-                groupAdapter.add(CarouselItem(topRated))
+                groupAdapter += CarouselItem(topRated)
 
-                groupAdapter.add(SpaceItem)
+                groupAdapter += SpaceItem
 
-                groupAdapter.add(HeaderItem(getString(R.string.popular_movies_title)))
-                groupAdapter.add(CarouselItem(popular))
+                groupAdapter += HeaderItem(getString(R.string.popular_movies_title))
+                groupAdapter += CarouselItem(popular)
 
-                groupAdapter.add(SpaceItem)
+                groupAdapter += SpaceItem
 
-                groupAdapter.add(HeaderItem(getString(R.string.now_playing_movies_title)))
-                groupAdapter.add(CarouselItem(nowPlaying))
+                groupAdapter += HeaderItem(getString(R.string.now_playing_movies_title))
+                groupAdapter += CarouselItem(nowPlaying)
 
-                groupAdapter.add(SpaceItem)
+                groupAdapter += SpaceItem
 
-                groupAdapter.add(HeaderItem(getString(R.string.upcoming_movies_title)))
-                groupAdapter.add(CarouselItem(upcoming))
+                groupAdapter += HeaderItem(getString(R.string.upcoming_movies_title))
+                groupAdapter += CarouselItem(upcoming)
             }
 
             groupAdapter.add(SpaceItem)
 
             tvShows.apply {
-                groupAdapter.add(HeaderItem(getString(R.string.tv_title)))
-                groupAdapter.add(HeaderItem(getString(R.string.top_rated_movies_title)))
-                groupAdapter.add(CarouselItem(tvTopRated))
+                groupAdapter += HeaderItem(getString(R.string.tv_title))
+                groupAdapter += HeaderItem(getString(R.string.top_rated_movies_title))
+                groupAdapter += CarouselItem(tvTopRated)
 
-                groupAdapter.add(SpaceItem)
+                groupAdapter += SpaceItem
 
-                groupAdapter.add(HeaderItem(getString(R.string.popular_movies_title)))
-                groupAdapter.add(CarouselItem(tvPopular))
+                groupAdapter += HeaderItem(getString(R.string.popular_movies_title))
+                groupAdapter += CarouselItem(tvPopular)
 
-                groupAdapter.add(SpaceItem)
+                groupAdapter += SpaceItem
             }
         }
     }

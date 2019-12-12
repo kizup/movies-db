@@ -43,9 +43,6 @@ dependencies {
     // Moxy
     kapt "com.github.moxy-community:moxy-compiler:${versions.moxy}"
 
-    // FastAdapter
-    implementation "com.mikepenz:fastadapter:${versions.fastAdapter}"
-
     // Groupie (rv adapter)
     implementation "com.xwray:groupie:${versions.groupie}"
     implementation "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"

@@ -1,6 +1,7 @@
 package com.example.feature.home.screen.presentation.model
 
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -14,6 +15,8 @@ class MovieItem(
     private val movie: Movie
 ) : Item() {
 
+    private var requestManager: RequestManager? = null
+
     override fun getId(): Long {
         return movie.id
     }
@@ -21,13 +24,19 @@ class MovieItem(
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         movie.posterPath?.let {
             val url = "https://image.tmdb.org/t/p/w400$it"
-            Glide.with(viewHolder.ivCover)
-                .load(url)
-                .transform(CenterCrop())
-                .transform(RoundedCorners(40))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(viewHolder.ivCover)
+            requestManager = Glide.with(viewHolder.ivCover).apply {
+                load(url)
+                    .transform(CenterCrop())
+                    .transform(RoundedCorners(40))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(viewHolder.ivCover)
+            }
         }
+    }
+
+    override fun unbind(viewHolder: GroupieViewHolder) {
+        requestManager?.clear(viewHolder.ivCover)
+        super.unbind(viewHolder)
     }
 
     override fun getLayout(): Int = R.layout.item_movie
