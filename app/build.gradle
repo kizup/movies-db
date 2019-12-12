@@ -35,7 +35,7 @@ dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
     implementation project(":core-network-retrofit-impl")
-    implementation project(":core-network-tmdblib-impl")
+//    implementation project(":core-network-tmdblib-impl")
 
     implementation project(":feature-movies-list")
     implementation project(':feature-root-screen')

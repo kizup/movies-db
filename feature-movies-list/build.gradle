@@ -34,16 +34,6 @@ android {
 dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
-    implementation project(":core-network-retrofit-impl")
-
-    // FastAdapter
-    implementation "com.mikepenz:fastadapter:${versions.fastAdapter}"
-    // diff util helpers
-    implementation "com.mikepenz:fastadapter-extensions-diff:${versions.fastAdapter}"
-    // paging support
-    implementation "com.mikepenz:fastadapter-extensions-paged:${versions.fastAdapter}"
-    // scroll helpers
-    implementation "com.mikepenz:fastadapter-extensions-scroll:${versions.fastAdapter}"
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'

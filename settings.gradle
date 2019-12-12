@@ -1,5 +1,6 @@
-include ':core-utils', ':feature-home-tab',
-        ':app',
-        ':core-network-api', ':core-network-retrofit-impl', ':core-network-tmdblib-impl',
-        ':feature-movies-list', ':feature-root-screen'
+apply from: 'features_settings.gradle'
+apply from: 'core_settings.gradle'
+
+include ':app'
+
 rootProject.name='MoviesDB'

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compile_sdk_version
@@ -26,9 +27,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    api project(":core-utils")
-
-    // Rx
-    api "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
+    api project(":core-network-api")
 }

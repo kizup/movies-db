@@ -18,13 +18,6 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
@@ -59,6 +52,10 @@ dependencies {
     // Rx
     api "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
     api "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
+
+    // Groupie (rv adapter)
+    api "com.xwray:groupie:${versions.groupie}"
+    api "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"
 }
 
 dependencies {

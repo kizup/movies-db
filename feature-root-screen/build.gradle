@@ -32,7 +32,6 @@ android {
 dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
-    implementation project(":core-network-retrofit-impl")
     implementation project(':feature-home-tab')
 
     // Dagger

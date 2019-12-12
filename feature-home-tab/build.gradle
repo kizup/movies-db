@@ -34,7 +34,6 @@ android {
 dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
-    implementation project(":core-network-retrofit-impl")
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
@@ -42,10 +41,6 @@ dependencies {
 
     // Moxy
     kapt "com.github.moxy-community:moxy-compiler:${versions.moxy}"
-
-    // Groupie (rv adapter)
-    implementation "com.xwray:groupie:${versions.groupie}"
-    implementation "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:${versions.glide}"

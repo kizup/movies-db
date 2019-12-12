@@ -1,6 +1,5 @@
 package com.example.moviesdb.movies.list.presentation.mvp
 
-import com.example.moviesdb.movies.list.adapter.MovieItem
 import com.example.moviesdb.movies.list.api.MoviesListNavigator
 import com.example.moviesdb.movies.list.presentation.view.IMoviesListView
 import com.example.moviesdb.network.api.TheMovieDBClientApi
@@ -26,14 +25,8 @@ class MoviesListPresenter @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ movies ->
-                viewState.addMovies(movies.map { MovieItem(it) })
             }, this::handleError)
         }
-    }
-
-    fun onMovieClick(item: MovieItem): Boolean {
-        navigator.navigateToMovieDetails(item)
-        return true
     }
 
 }
