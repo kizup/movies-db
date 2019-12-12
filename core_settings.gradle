@@ -1,4 +1,6 @@
 include ':core-utils',
         ':core-common',
         ':core-network-api',
+        ':core-db-api',
+        ':core-db-room-impl',
         ':core-network-retrofit-impl'//, ':core-network-tmdblib-impl',

@@ -34,6 +34,7 @@ android {
 dependencies {
     implementation project(":core-utils")
     implementation project(":core-network-api")
+    implementation project(":core-db-api")
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'

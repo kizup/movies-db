@@ -3,6 +3,7 @@ package com.example.moviesdb.movies.list.di
 import com.example.core.main.fragment.api.MainDependencies
 import com.example.feature.home.screen.api.HomeDependencies
 import com.example.moviesdb.MainActivity
+import com.example.moviesdb.db.di.CoreDatabaseApiDependencies
 import com.example.moviesdb.movies.list.api.MoviesListDependencies
 import com.example.moviesdb.movies.list.api.MoviesListNavigator
 import com.example.moviesdb.utils.ComponentDependencies
@@ -26,7 +27,11 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface AppComponent : CoreNetworkApiDependencies, MoviesListDependencies, MainDependencies, HomeDependencies {
+interface AppComponent :
+//    CoreDatabaseApiDependencies,
+    MoviesListDependencies,
+    MainDependencies,
+    HomeDependencies {
 
     fun inject(activity: MainActivity)
 
@@ -65,10 +70,15 @@ class NavigatorModule {
 @Module
 private abstract class ComponentDependenciesModule private constructor() {
 
+//    @Binds
+//    @IntoMap
+//    @ComponentDependenciesKey(CoreNetworkApiDependencies::class)
+//    abstract fun provideCoreNetworkApiDependencies(appComponent: AppComponent): ComponentDependencies
+
     @Binds
     @IntoMap
-    @ComponentDependenciesKey(CoreNetworkApiDependencies::class)
-    abstract fun provideCoreNetworkApiDependencies(appComponent: AppComponent): ComponentDependencies
+    @ComponentDependenciesKey(CoreDatabaseApiDependencies::class)
+    abstract fun provideCoreDatabaseApiDependencies(appComponent: AppComponent): ComponentDependencies
 
     @Binds
     @IntoMap
