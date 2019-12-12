@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feature.home.screen.R
 import com.example.feature.home.screen.di.DaggerHomeComponent
-import com.example.feature.home.screen.presentation.model.CarouselItem
-import com.example.feature.home.screen.presentation.model.HeaderItem
-import com.example.feature.home.screen.presentation.model.HomeTabScreenData
-import com.example.feature.home.screen.presentation.model.SpaceItem
+import com.example.feature.home.screen.presentation.model.*
 import com.example.feature.home.screen.presentation.mvp.HomePresenter
 import com.example.feature.home.screen.utils.plusAssign
 import com.example.moviesdb.presentation.view.base.BaseFragment
@@ -68,21 +65,25 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
         data.apply {
             allMovies.apply {
                 groupAdapter += HeaderItem(getString(R.string.top_rated_movies_title))
+                { presenter.navigateToAllItems(MovieListType.TopRatedMovies) }
                 groupAdapter += CarouselItem(topRated)
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.popular_movies_title))
+                { presenter.navigateToAllItems(MovieListType.PopularMovies) }
                 groupAdapter += CarouselItem(popular)
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.now_playing_movies_title))
+                { presenter.navigateToAllItems(MovieListType.NowPlayingMovies) }
                 groupAdapter += CarouselItem(nowPlaying)
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.upcoming_movies_title))
+                { presenter.navigateToAllItems(MovieListType.UpcomingMovies) }
                 groupAdapter += CarouselItem(upcoming)
             }
 
@@ -90,12 +91,15 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
 
             tvShows.apply {
                 groupAdapter += HeaderItem(getString(R.string.tv_title))
+                { presenter.navigateToAllItems(MovieListType.TEST) }
                 groupAdapter += HeaderItem(getString(R.string.top_rated_movies_title))
+                { presenter.navigateToAllItems(MovieListType.TEST) }
                 groupAdapter += CarouselItem(tvTopRated)
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.popular_movies_title))
+                { presenter.navigateToAllItems(MovieListType.TEST) }
                 groupAdapter += CarouselItem(tvPopular)
 
                 groupAdapter += SpaceItem

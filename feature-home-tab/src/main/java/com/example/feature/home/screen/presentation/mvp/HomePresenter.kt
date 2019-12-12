@@ -70,4 +70,9 @@ class HomePresenter @Inject constructor(
         )
     }
 
+    fun navigateToAllItems(type: Enum<MovieListType>) {
+        println(type)
+
+
+    }
 }
