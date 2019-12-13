@@ -16,12 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
 
     compileOptions {
         sourceCompatibility 1.8
@@ -30,8 +24,7 @@ android {
 }
 
 dependencies {
-    implementation project(":core-tab-host")
-    implementation project(":feature-home-tab")
+    api project(":core-utils")
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
@@ -39,7 +32,4 @@ dependencies {
 
     // Moxy
     kapt "com.github.moxy-community:moxy-compiler:${versions.moxy}"
-
-    // Navigation
-    implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
 }

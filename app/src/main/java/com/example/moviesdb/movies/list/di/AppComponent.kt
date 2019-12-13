@@ -1,11 +1,13 @@
 package com.example.moviesdb.movies.list.di
 
-import com.example.core.main.fragment.api.MainDependencies
+import com.example.core.main.fragment.api.RootDependencies
 import com.example.feature.home.screen.api.HomeDependencies
 import com.example.moviesdb.MainActivity
 import com.example.moviesdb.db.di.CoreDatabaseApiDependencies
 import com.example.moviesdb.movies.list.api.MoviesListDependencies
 import com.example.moviesdb.movies.list.api.MoviesListNavigator
+import com.example.moviesdb.movies.list.di.modules.NavigatorModule
+import com.example.moviesdb.navigation.GlobalNavigation
 import com.example.moviesdb.utils.ComponentDependencies
 import com.example.moviesdb.utils.ComponentDependenciesKey
 import dagger.Binds
@@ -23,48 +25,18 @@ import javax.inject.Singleton
         RetrofitNetworkModule::class,
 //        TMDBLibNetworkModule::class,
         ComponentDependenciesModule::class,
-    NavigatorModule::class
+        NavigatorModule::class
     ]
 )
 @Singleton
 interface AppComponent :
 //    CoreDatabaseApiDependencies,
     MoviesListDependencies,
-    MainDependencies,
+    RootDependencies,
     HomeDependencies {
 
     fun inject(activity: MainActivity)
 
-}
-
-@Module
-class NavigatorModule {
-
-    private val cicerone: Cicerone<Router> = Cicerone.create()
-
-    @Provides
-    @Singleton
-    fun provideMoviesListNavigator(router: Router): MoviesListNavigator {
-        return GlobalNavigator(router)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNavigatorHolder() : NavigatorHolder {
-        return cicerone.navigatorHolder
-    }
-
-    @Provides
-    @Singleton
-    fun provideRouter(): Router {
-        return cicerone.router
-    }
-
-    @Provides
-    @Singleton
-    fun provideCicerone() : Cicerone<Router> {
-        return cicerone
-    }
 }
 
 @Module
@@ -87,8 +59,8 @@ private abstract class ComponentDependenciesModule private constructor() {
 
     @Binds
     @IntoMap
-    @ComponentDependenciesKey(MainDependencies::class)
-    abstract fun provideMainDependencies(appComponent: AppComponent): ComponentDependencies
+    @ComponentDependenciesKey(RootDependencies::class)
+    abstract fun provideRootDependencies(appComponent: AppComponent): ComponentDependencies
 
     @Binds
     @IntoMap

@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.moviesdb.db.api" />
+    package="com.example.moviesdb.root.tab" />

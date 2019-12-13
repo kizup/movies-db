@@ -6,6 +6,6 @@ import moxy.InjectViewState
 import javax.inject.Inject
 
 @InjectViewState
-class MainPresenter @Inject constructor() : BasePresenter<IMainView>() {
+class RootPresenter @Inject constructor() : BasePresenter<IMainView>() {
 
 }
