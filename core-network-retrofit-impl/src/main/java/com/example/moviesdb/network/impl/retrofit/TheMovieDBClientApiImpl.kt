@@ -5,34 +5,58 @@ import com.example.moviesdb.network.impl.responses.PagingResponse
 import com.example.moviesdb.network.impl.responses.movie.MovieResponse
 import com.example.moviesdb.network.impl.responses.movie.TvShowResponse
 import com.example.moviesdb.network.model.Movie
+import com.example.moviesdb.network.model.MovieType
 import com.example.moviesdb.network.model.TvShow
+import com.example.moviesdb.network.model.TvShowType
 import io.reactivex.Single
 
 class TheMovieDBClientApiImpl(
     private val apiService: IApiService
 ) : TheMovieDBClientApi {
 
-    override fun loadPopularMovies(page: Int): Single<List<Movie>> {
+    override fun loadMovies(
+        type: MovieType,
+        page: Int
+    ): Single<List<Movie>> {
+        return when (type) {
+            is MovieType.Popular -> loadPopularMovies(page)
+            is MovieType.NowPlaying -> loadNowPlayingMovies(page)
+            is MovieType.TopRated -> loadTopRatedMovies(page)
+            is MovieType.Upcoming -> loadUpcomingMovies(page)
+        }
+    }
+
+    override fun loadTvShows(
+        type: TvShowType,
+        page: Int
+    ): Single<List<TvShow>> {
+        return when (type) {
+            is TvShowType.Popular -> loadTvPopularSerials(page)
+            is TvShowType.TopRated -> loadTvTopRatedSerials(page)
+        }
+    }
+
+    private fun loadPopularMovies(page: Int): Single<List<Movie>> {
         return apiService.loadPopularMovies(page).toMoviesList()
     }
 
-    override fun loadNowPlayingMovies(page: Int): Single<List<Movie>> {
+    private fun loadNowPlayingMovies(page: Int): Single<List<Movie>> {
         return apiService.loadNowPlayingMovies(page).toMoviesList()
     }
 
-    override fun loadTopRatedMovies(page: Int): Single<List<Movie>> {
+    private fun loadTopRatedMovies(page: Int): Single<List<Movie>> {
         return apiService.loadTopRatedMovies(page).toMoviesList()
     }
 
-    override fun loadUpcomingMovies(page: Int): Single<List<Movie>> {
+    private fun loadUpcomingMovies(page: Int): Single<List<Movie>> {
         return apiService.loadUpcomingMovies(page).toMoviesList()
     }
 
-    override fun loadTvTopRatedSerials(page: Int): Single<List<TvShow>> {
+    private fun loadTvTopRatedSerials(page: Int): Single<List<TvShow>> {
         return apiService.loadTopRatedTv(page).toTvShowsList()
     }
 
-    override fun loadTvPopularSerials(page: Int): Single<List<TvShow>> {
+    private fun loadTvPopularSerials(page: Int): Single<List<TvShow>> {
         return apiService.loadPopularTv(page).toTvShowsList()
     }
 

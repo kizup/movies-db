@@ -4,7 +4,9 @@ import com.example.feature.home.screen.presentation.model.*
 import com.example.feature.home.screen.presentation.view.IHomeView
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.model.Movie
+import com.example.moviesdb.network.model.MovieType
 import com.example.moviesdb.network.model.TvShow
+import com.example.moviesdb.network.model.TvShowType
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,10 +44,10 @@ class HomePresenter @Inject constructor(
 
     private fun loadMovies(): Single<AllMovies> {
         return Single.zip(
-            tmdbClient.loadPopularMovies(),
-            tmdbClient.loadNowPlayingMovies(),
-            tmdbClient.loadTopRatedMovies(),
-            tmdbClient.loadUpcomingMovies(),
+            tmdbClient.loadMovies(MovieType.Popular),
+            tmdbClient.loadMovies(MovieType.NowPlaying),
+            tmdbClient.loadMovies(MovieType.TopRated),
+            tmdbClient.loadMovies(MovieType.Upcoming),
             Function4<List<Movie>, List<Movie>, List<Movie>, List<Movie>, AllMovies> { popular, nowPlaying, topRated, upcoming ->
                 AllMovies(
                     popular.map { MovieItem(it) },
@@ -59,8 +61,8 @@ class HomePresenter @Inject constructor(
 
     private fun loadTvShows(): Single<AllTvShows> {
         return Single.zip(
-            tmdbClient.loadTvTopRatedSerials(),
-            tmdbClient.loadTvPopularSerials(),
+            tmdbClient.loadTvShows(TvShowType.TopRated),
+            tmdbClient.loadTvShows(TvShowType.Popular),
             BiFunction<List<TvShow>, List<TvShow>, AllTvShows> { topRates, popular ->
                 AllTvShows(
                     topRates.map { TvShowItem(it) },

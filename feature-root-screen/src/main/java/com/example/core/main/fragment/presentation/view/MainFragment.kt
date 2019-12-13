@@ -100,13 +100,6 @@ class MainFragment : BaseFragment<MainPresenter>() {
         }.commitNow()
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        client.loadPopularMovies()
-        println()
-    }
-
     companion object {
         private val homeTab = Screens.Home
         private val searchTab = Screens.Search

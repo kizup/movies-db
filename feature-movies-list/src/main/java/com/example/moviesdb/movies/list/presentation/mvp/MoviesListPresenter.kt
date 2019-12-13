@@ -21,12 +21,12 @@ class MoviesListPresenter @Inject constructor(
     }
 
     private fun loadMoviesList() {
-        launch { tmdbClient.loadPopularMovies()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ movies ->
-            }, this::handleError)
-        }
+//        launch { tmdbClient.loadPopularMovies()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({ movies ->
+//            }, this::handleError)
+//        }
     }
 
 }
