@@ -7,8 +7,6 @@ import com.example.moviesdb.root.tab.R
 import com.example.moviesdb.root.tab.di.components.DaggerTabHostComponent
 import com.example.moviesdb.root.tab.navigation.ILocalNavigator
 import com.example.moviesdb.root.tab.presentation.mvp.HostPresenter
-import com.example.moviesdb.utils.ComponentDependenciesProvider
-import com.example.moviesdb.utils.HasComponentDependencies
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -17,11 +15,7 @@ import ru.terrakok.cicerone.commands.Command
 import javax.inject.Inject
 
 class HostFragment : BaseFragment<HostPresenter>(),
-    HasComponentDependencies,
     IHostView {
-
-    @Inject
-    override lateinit var dependencies: ComponentDependenciesProvider
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -29,7 +23,7 @@ class HostFragment : BaseFragment<HostPresenter>(),
     @Inject
     lateinit var localNavigator: ILocalNavigator
 
-    private val navigator: Navigator =
+    private val navigator: Navigator by lazy {
         object : SupportAppNavigator(activity, childFragmentManager, R.id.host_container) {
             override fun setupFragmentTransaction(
                 command: Command?,
@@ -40,6 +34,7 @@ class HostFragment : BaseFragment<HostPresenter>(),
 
             }
         }
+    }
 
     override val layoutId: Int
         get() = R.layout.fragment_tab_host
@@ -60,7 +55,6 @@ class HostFragment : BaseFragment<HostPresenter>(),
         super.onPause()
     }
 
-    override fun localNavigateTo(screen: SupportAppScreen) {
-        localNavigator.navigateTo(screen)
-    }
+    override fun localNavigateTo(screen: SupportAppScreen) = localNavigator.navigateTo(screen)
+    override fun localSetRoot(screen: SupportAppScreen) = localNavigator.root(screen)
 }

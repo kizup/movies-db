@@ -6,4 +6,6 @@ interface ILocalNavigator {
 
     fun navigateTo(screen: SupportAppScreen)
 
+    fun root(screen: SupportAppScreen)
+
 }

@@ -10,4 +10,7 @@ interface IHostView : IBaseView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun localNavigateTo(screen : SupportAppScreen)
 
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun localSetRoot(screen : SupportAppScreen)
+
 }

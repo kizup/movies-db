@@ -7,7 +7,6 @@ class LocalNavigator(
     private val router: Router
 ) : ILocalNavigator {
 
-    override fun navigateTo(screen: SupportAppScreen) {
-        router.navigateTo(screen)
-    }
+    override fun navigateTo(screen: SupportAppScreen) = router.navigateTo(screen)
+    override fun root(screen: SupportAppScreen) = router.newRootScreen(screen)
 }

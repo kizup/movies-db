@@ -8,6 +8,7 @@ import com.example.core.main.fragment.R
 import com.example.core.main.fragment.di.DaggerRootComponent
 import com.example.core.main.fragment.presentation.mvp.RootPresenter
 import com.example.moviesdb.presentation.view.base.BaseFragment
+import com.example.moviesdb.root.tab.presentation.view.HostFragment
 import com.example.moviesdb.utils.findComponentDependencies
 import kotlinx.android.synthetic.main.fragment_main.*
 import moxy.ktx.moxyPresenter
@@ -16,6 +17,8 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 class RootFragment : BaseFragment<RootPresenter>() {
 
     val presenter: RootPresenter by moxyPresenter { lazyPresenter.get() }
+
+    private val tabFragmentMap = HashMap<String, HostFragment?>()
 
     override fun performInject() {
         DaggerRootComponent.builder()
@@ -26,8 +29,8 @@ class RootFragment : BaseFragment<RootPresenter>() {
     override val layoutId: Int
         get() = R.layout.fragment_main
 
-    private val currentTabFragment: BaseFragment<*>?
-        get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment<*>
+    private val currentTabFragment: HostFragment?
+        get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? HostFragment
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -67,7 +70,9 @@ class RootFragment : BaseFragment<RootPresenter>() {
         )
     }
 
-    private fun createTabFragment(tab: SupportAppScreen) = tab.fragment
+    private fun createTabFragment(tab: SupportAppScreen): HostFragment {
+        return HostFragment()
+    }
 
     private fun selectTab(tab: SupportAppScreen) {
 
@@ -76,8 +81,12 @@ class RootFragment : BaseFragment<RootPresenter>() {
 
         if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
 
+        var needSetupRootScreenInHost = false
         childFragmentManager.beginTransaction().apply {
-            if (newFragment == null) add(R.id.mainScreenContainer, createTabFragment(tab), tab.screenKey)
+            if (newFragment == null) {
+                add(R.id.mainScreenContainer, createTabFragment(tab), tab.screenKey)
+                needSetupRootScreenInHost = true
+            }
 
             currentFragment?.let {
                 hide(it)
@@ -88,6 +97,10 @@ class RootFragment : BaseFragment<RootPresenter>() {
                 it.userVisibleHint = true
             }
         }.commitNow()
+
+        if (needSetupRootScreenInHost) {
+            currentTabFragment?.localSetRoot(tab)
+        }
     }
 
     companion object {
