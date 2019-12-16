@@ -18,8 +18,6 @@ class RootFragment : BaseFragment<RootPresenter>() {
 
     val presenter: RootPresenter by moxyPresenter { lazyPresenter.get() }
 
-    private val tabFragmentMap = HashMap<String, HostFragment?>()
-
     override fun performInject() {
         DaggerRootComponent.builder()
             .rootDependencies(findComponentDependencies())

@@ -8,6 +8,7 @@ import com.example.moviesdb.network.model.MovieType
 import com.example.moviesdb.network.model.TvShow
 import com.example.moviesdb.network.model.TvShowType
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
+import com.example.moviesdb.root.tab.navigation.ILocalNavigator
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class HomePresenter @Inject constructor(
-    private val tmdbClient: TheMovieDBClientApi
+    private val tmdbClient: TheMovieDBClientApi,
+    private val localNavigator: ILocalNavigator
 ) : BasePresenter<IHomeView>() {
 
     override fun onFirstViewAttach() {
