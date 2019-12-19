@@ -1,6 +1,6 @@
 apply from: 'features_settings.gradle'
 apply from: 'core_settings.gradle'
 
-include ':app'
+include ':app', ':feature-movie-details'
 
 rootProject.name='MoviesDB'
