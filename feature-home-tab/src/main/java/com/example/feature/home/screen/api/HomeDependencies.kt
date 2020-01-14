@@ -7,11 +7,6 @@ import com.example.moviesdb.utils.ComponentDependencies
 interface HomeDependencies : ComponentDependencies {
 
     fun tmdbClient(): TheMovieDBClientApi
-
-}
-
-interface HomeNavigatorDependencies : ComponentDependencies {
-
     fun localNavigator(): ILocalNavigator
 
 }

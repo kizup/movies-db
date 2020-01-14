@@ -25,4 +25,6 @@ abstract class BasePresenter<View: IBaseView> : MvpPresenter<View>() {
         super.onDestroy()
     }
 
+    open fun back() {}
+
 }

@@ -41,7 +41,11 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
     val presenter: HomePresenter by moxyPresenter { lazyPresenter.get() }
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
+    private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy {
+        GroupAdapter<GroupieViewHolder>().apply {
+            setHasStableIds(true)
+        }
+    }
 
     override val layoutId: Int
         get() = R.layout.fragment_home
@@ -54,14 +58,15 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
     }
 
     private fun initRecyclerView() {
-        groupAdapter.setHasStableIds(true)
         rvHome.apply {
             layoutManager = linearLayoutManager
-            setHasFixedSize(false)
             isNestedScrollingEnabled = false
             adapter = groupAdapter
         }
         groupAdapter.clear()
+        groupAdapter.setOnItemClickListener { item, view ->
+            presenter.onItemClick(item)
+        }
     }
 
     override fun setMoviesData(data: HomeTabScreenData) {

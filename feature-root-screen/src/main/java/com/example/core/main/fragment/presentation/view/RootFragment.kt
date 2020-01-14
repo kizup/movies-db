@@ -30,7 +30,6 @@ class RootFragment : BaseFragment<RootPresenter>() {
     private val currentTabFragment: HostFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? HostFragment
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -53,8 +52,6 @@ class RootFragment : BaseFragment<RootPresenter>() {
                 )
                 true
             }
-//            val leftMargin = resources.getDimension(R.dimen.bottom_bar_notification_left_margin).toInt()
-//            setNotificationMarginLeft(leftMargin, leftMargin)
         }
 
         selectTab(
@@ -66,6 +63,10 @@ class RootFragment : BaseFragment<RootPresenter>() {
                 else -> homeTab
             }
         )
+    }
+
+    override fun onBackPressed() {
+        currentTabFragment?.onBackPressed() ?: super.onBackPressed()
     }
 
     private fun createTabFragment(tab: SupportAppScreen): HostFragment {

@@ -41,6 +41,8 @@ dependencies {
     implementation project(":core-db-room-impl")
 //    implementation project(":core-network-tmdblib-impl")
 
+    implementation project(":core-tab-host")
+
     implementation project(":feature-movies-list")
     implementation project(':feature-root-screen')
     implementation project(':feature-home-tab')
