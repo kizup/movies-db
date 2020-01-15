@@ -41,6 +41,8 @@ dependencies {
     implementation project(":core-db-room-impl")
 //    implementation project(":core-network-tmdblib-impl")
 
+    implementation project(":core-tab-host")
+
     implementation project(":feature-movies-list")
     implementation project(':feature-root-screen')
     implementation project(':feature-home-tab')
@@ -51,9 +53,6 @@ dependencies {
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-
-    // Cicerone
-    implementation "ru.terrakok.cicerone:cicerone:${versions.cicerone}"
 
     // Navigation
     implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"

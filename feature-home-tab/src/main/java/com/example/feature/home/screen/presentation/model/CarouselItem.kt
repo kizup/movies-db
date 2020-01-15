@@ -12,7 +12,8 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_carousel.*
 
 class CarouselItem(
-    private val movieItems: List<Item>
+    private val movieItems: List<Item>,
+    private val clickAction: (Item) -> Unit
 ) : Item() {
 
     private val moviesAdapter = GroupAdapter<GroupieViewHolder>()
@@ -29,9 +30,15 @@ class CarouselItem(
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        moviesAdapter.setOnItemClickListener { item, _ ->  clickAction(item as Item) }
         viewHolder.rvCarousel.adapter = moviesAdapter
         moviesAdapter.clear()
         moviesAdapter.addAll(movieItems)
+    }
+
+    override fun unbind(viewHolder: GroupieViewHolder) {
+        moviesAdapter.setOnItemClickListener(null)
+        super.unbind(viewHolder)
     }
 
     override fun getLayout(): Int = R.layout.item_carousel

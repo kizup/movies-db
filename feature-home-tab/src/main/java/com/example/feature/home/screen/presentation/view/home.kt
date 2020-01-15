@@ -12,13 +12,15 @@ import com.example.feature.home.screen.presentation.model.HomeTabScreenData
 import com.example.feature.home.screen.presentation.model.SpaceItem
 import com.example.feature.home.screen.presentation.mvp.HomePresenter
 import com.example.feature.home.screen.utils.plusAssign
-import com.example.moviesdb.presentation.view.base.BaseFragment
 import com.example.moviesdb.presentation.view.base.IBaseView
+import com.example.moviesdb.root.tab.presentation.view.HostChildFragment
 import com.example.moviesdb.utils.findComponentDependencies
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
@@ -29,19 +31,25 @@ interface IHomeView : IBaseView {
 
 }
 
-class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
+class HomeFragment : HostChildFragment<HomePresenter>(), IHomeView {
 
     override fun performInject() {
-        DaggerHomeComponent.builder()
+        DaggerHomeComponent
+            .builder()
             .homeDependencies(findComponentDependencies())
             .build()
             .inject(this)
     }
 
-    val presenter: HomePresenter by moxyPresenter { lazyPresenter.get() }
+    private val presenter: HomePresenter
+            by moxyPresenter { lazyPresenter.get().apply { localNavigator = parentNavigator } }
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
+    private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy {
+        GroupAdapter<GroupieViewHolder>().apply {
+            setHasStableIds(true)
+        }
+    }
 
     override val layoutId: Int
         get() = R.layout.fragment_home
@@ -54,10 +62,8 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
     }
 
     private fun initRecyclerView() {
-        groupAdapter.setHasStableIds(true)
         rvHome.apply {
             layoutManager = linearLayoutManager
-            setHasFixedSize(false)
             isNestedScrollingEnabled = false
             adapter = groupAdapter
         }
@@ -68,22 +74,22 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
         data.apply {
             allMovies.apply {
                 groupAdapter += HeaderItem(getString(R.string.top_rated_movies_title))
-                groupAdapter += CarouselItem(topRated)
+                groupAdapter += CarouselItem(topRated) { presenter.onItemClick(it) }
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.popular_movies_title))
-                groupAdapter += CarouselItem(popular)
+                groupAdapter += CarouselItem(popular) { presenter.onItemClick(it) }
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.now_playing_movies_title))
-                groupAdapter += CarouselItem(nowPlaying)
+                groupAdapter += CarouselItem(nowPlaying) { presenter.onItemClick(it) }
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.upcoming_movies_title))
-                groupAdapter += CarouselItem(upcoming)
+                groupAdapter += CarouselItem(upcoming) { presenter.onItemClick(it) }
             }
 
             groupAdapter.add(SpaceItem)
@@ -91,12 +97,12 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
             tvShows.apply {
                 groupAdapter += HeaderItem(getString(R.string.tv_title))
                 groupAdapter += HeaderItem(getString(R.string.top_rated_movies_title))
-                groupAdapter += CarouselItem(tvTopRated)
+                groupAdapter += CarouselItem(tvTopRated) { presenter.onItemClick(it) }
 
                 groupAdapter += SpaceItem
 
                 groupAdapter += HeaderItem(getString(R.string.popular_movies_title))
-                groupAdapter += CarouselItem(tvPopular)
+                groupAdapter += CarouselItem(tvPopular) { presenter.onItemClick(it) }
 
                 groupAdapter += SpaceItem
             }

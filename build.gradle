@@ -12,7 +12,7 @@ buildscript {
             rxKotlin          : '2.4.0',
             rxAndroid         : '2.1.1',
             cicerone          : '5.0.0',
-            androidxRecycler  : '1.1.0-beta04',
+            androidxRecycler  : '1.1.0',
             androidxCore      : '1.1.0',
             androidxAppCompat : '1.1.0',
             materialDesign    : '1.1.0-beta01',

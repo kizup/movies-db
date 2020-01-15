@@ -30,9 +30,8 @@ android {
 }
 
 dependencies {
-    implementation project(":core-utils")
-    implementation project(":core-network-api")
-    implementation project(':feature-home-tab')
+    implementation project(":core-tab-host")
+    implementation project(":feature-home-tab")
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
@@ -43,7 +42,4 @@ dependencies {
 
     // Navigation
     implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
-
-    // Cicerone
-    implementation "ru.terrakok.cicerone:cicerone:${versions.cicerone}"
 }

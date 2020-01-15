@@ -1,44 +1,34 @@
 package com.example.core.main.fragment.presentation.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.example.core.main.Screens
 import com.example.core.main.fragment.R
-import com.example.core.main.fragment.di.DaggerMainComponent
-import com.example.core.main.fragment.presentation.mvp.MainPresenter
-import com.example.moviesdb.network.api.TheMovieDBClientApi
+import com.example.core.main.fragment.di.DaggerRootComponent
+import com.example.core.main.fragment.presentation.mvp.RootPresenter
 import com.example.moviesdb.presentation.view.base.BaseFragment
+import com.example.moviesdb.root.tab.presentation.view.HostFragment
 import com.example.moviesdb.utils.findComponentDependencies
 import kotlinx.android.synthetic.main.fragment_main.*
-import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import moxy.presenter.ProvidePresenter
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import javax.inject.Inject
 
-class MainFragment : BaseFragment<MainPresenter>() {
+class RootFragment : BaseFragment<RootPresenter>() {
 
-    @Inject
-    lateinit var client : TheMovieDBClientApi
-
-    val presenter: MainPresenter by moxyPresenter { lazyPresenter.get() }
+    val presenter: RootPresenter by moxyPresenter { lazyPresenter.get() }
 
     override fun performInject() {
-        DaggerMainComponent.builder()
-            .mainDependencies(findComponentDependencies())
+        DaggerRootComponent.builder()
+            .rootDependencies(findComponentDependencies())
             .build().inject(this)
     }
 
     override val layoutId: Int
         get() = R.layout.fragment_main
 
-    private val currentTabFragment: BaseFragment<*>?
-        get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment<*>
-
+    private val currentTabFragment: HostFragment?
+        get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? HostFragment
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -62,8 +52,6 @@ class MainFragment : BaseFragment<MainPresenter>() {
                 )
                 true
             }
-//            val leftMargin = resources.getDimension(R.dimen.bottom_bar_notification_left_margin).toInt()
-//            setNotificationMarginLeft(leftMargin, leftMargin)
         }
 
         selectTab(
@@ -77,7 +65,13 @@ class MainFragment : BaseFragment<MainPresenter>() {
         )
     }
 
-    private fun createTabFragment(tab: SupportAppScreen) = tab.fragment
+    override fun onBackPressed() {
+        currentTabFragment?.onBackPressed() ?: super.onBackPressed()
+    }
+
+    private fun createTabFragment(tab: SupportAppScreen): HostFragment {
+        return HostFragment()
+    }
 
     private fun selectTab(tab: SupportAppScreen) {
 
@@ -86,8 +80,12 @@ class MainFragment : BaseFragment<MainPresenter>() {
 
         if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
 
+        var needSetupRootScreenInHost = false
         childFragmentManager.beginTransaction().apply {
-            if (newFragment == null) add(R.id.mainScreenContainer, createTabFragment(tab), tab.screenKey)
+            if (newFragment == null) {
+                add(R.id.mainScreenContainer, createTabFragment(tab), tab.screenKey)
+                needSetupRootScreenInHost = true
+            }
 
             currentFragment?.let {
                 hide(it)
@@ -98,6 +96,10 @@ class MainFragment : BaseFragment<MainPresenter>() {
                 it.userVisibleHint = true
             }
         }.commitNow()
+
+        if (needSetupRootScreenInHost) {
+            currentTabFragment?.localSetRoot(tab)
+        }
     }
 
     companion object {

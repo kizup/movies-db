@@ -8,6 +8,9 @@ import com.example.moviesdb.network.model.MovieType
 import com.example.moviesdb.network.model.TvShow
 import com.example.moviesdb.network.model.TvShowType
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
+import com.example.moviesdb.root.tab.navigation.ILocalNavigator
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
@@ -21,6 +24,8 @@ class HomePresenter @Inject constructor(
     private val tmdbClient: TheMovieDBClientApi
 ) : BasePresenter<IHomeView>() {
 
+    lateinit var localNavigator: ILocalNavigator
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadNowPlayingMovies()
@@ -31,7 +36,12 @@ class HomePresenter @Inject constructor(
             Single.zip(
                 loadMovies(),
                 loadTvShows(),
-                BiFunction<AllMovies, AllTvShows, HomeTabScreenData> { movies, tvShows -> HomeTabScreenData(movies, tvShows) }
+                BiFunction<AllMovies, AllTvShows, HomeTabScreenData> { movies, tvShows ->
+                    HomeTabScreenData(
+                        movies,
+                        tvShows
+                    )
+                }
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -72,4 +82,6 @@ class HomePresenter @Inject constructor(
         )
     }
 
+    fun onItemClick(item: Item) {
+    }
 }

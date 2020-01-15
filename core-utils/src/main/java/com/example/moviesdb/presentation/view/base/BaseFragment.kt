@@ -38,4 +38,7 @@ abstract class BaseFragment<Presenter: BasePresenter<*>> : MvpAppCompatFragment(
     override fun showMessage(message: String) {
         ToastUtils.showShort(message)
     }
+
+    open fun onBackPressed() {}
+
 }

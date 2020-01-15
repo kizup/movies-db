@@ -56,6 +56,9 @@ dependencies {
     // Groupie (rv adapter)
     api "com.xwray:groupie:${versions.groupie}"
     api "com.xwray:groupie-kotlin-android-extensions:${versions.groupie}"
+
+    // Cicerone
+    api "ru.terrakok.cicerone:cicerone:${versions.cicerone}"
 }
 
 dependencies {

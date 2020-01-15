@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.moviesdb.movies.list.di.DaggerAppComponent
+import com.example.moviesdb.movies.list.di.RetrofitNetworkModule
+import com.example.moviesdb.movies.list.di.modules.NavigatorModule
+import com.example.moviesdb.presentation.view.base.BaseFragment
 import com.example.moviesdb.utils.ComponentDependenciesProvider
 import com.example.moviesdb.utils.HasComponentDependencies
 import ru.terrakok.cicerone.Navigator
@@ -20,6 +23,9 @@ class MainActivity : AppCompatActivity(), HasComponentDependencies {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
+    private val currentFragment: BaseFragment<*>?
+        get() = supportFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment<*>
+
     private val navigator: Navigator =
         object : SupportAppNavigator(this, supportFragmentManager, R.id.container) {
             override fun setupFragmentTransaction(
@@ -28,7 +34,7 @@ class MainActivity : AppCompatActivity(), HasComponentDependencies {
                 nextFragment: Fragment?,
                 fragmentTransaction: FragmentTransaction?
             ) {
-
+                fragmentTransaction?.setReorderingAllowed(true)
             }
         }
 
@@ -36,7 +42,6 @@ class MainActivity : AppCompatActivity(), HasComponentDependencies {
         performInject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
     }
 
     override fun onResumeFragments() {
@@ -49,8 +54,14 @@ class MainActivity : AppCompatActivity(), HasComponentDependencies {
         super.onPause()
     }
 
+    override fun onBackPressed() {
+        currentFragment?.onBackPressed() ?: super.onBackPressed()
+    }
+
     private fun performInject() {
         DaggerAppComponent.builder()
+            .navigatorModule(NavigatorModule())
+            .retrofitNetworkModule(RetrofitNetworkModule())
             .build()
             .inject(this)
     }
