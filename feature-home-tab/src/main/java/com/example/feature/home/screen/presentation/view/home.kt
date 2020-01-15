@@ -13,6 +13,7 @@ import com.example.feature.home.screen.presentation.model.SpaceItem
 import com.example.feature.home.screen.presentation.mvp.HomePresenter
 import com.example.feature.home.screen.utils.plusAssign
 import com.example.moviesdb.presentation.view.base.IBaseView
+import com.example.moviesdb.presentation.view.base.ILoadingView
 import com.example.moviesdb.root.tab.presentation.view.HostChildFragment
 import com.example.moviesdb.utils.findComponentDependencies
 import com.xwray.groupie.GroupAdapter
@@ -24,7 +25,7 @@ import moxy.presenter.ProvidePresenter
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface IHomeView : IBaseView {
+interface IHomeView : IBaseView, ILoadingView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setMoviesData(data: HomeTabScreenData)

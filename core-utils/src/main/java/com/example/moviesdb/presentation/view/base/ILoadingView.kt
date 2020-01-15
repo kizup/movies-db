@@ -8,4 +8,7 @@ interface ILoadingView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showLoading(loading: Boolean)
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showErrorByLoading(show: Boolean)
+
 }

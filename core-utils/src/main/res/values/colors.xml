@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white_transparent">#66FFFFFF</color>
+    <color name="orange">#FF5722</color>
+
+    <color name="loading_container_bg">@color/white_transparent</color>
+    <color name="error_loading_text_color">@color/orange</color>
+    <color name="error_loading_warning_image_tine">@color/orange</color>
+</resources>

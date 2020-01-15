@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Utils</string>
+    <string name="error_default_text">Во время загрузки произошла ошибка</string>
+    <string name="retry_button">Повторить</string>
 </resources>

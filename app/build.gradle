@@ -7,6 +7,15 @@ android {
     compileSdkVersion rootProject.compile_sdk_version
     buildToolsVersion rootProject.build_tools_version
 
+    signingConfigs {
+        debug {
+            storeFile file('debug_key.jks')
+            storePassword 'debug_key'
+            keyAlias = 'debug_key'
+            keyPassword 'debug_key'
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.moviesdb"
         minSdkVersion rootProject.min_sdk_version
@@ -22,6 +31,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -39,7 +52,6 @@ dependencies {
 
     implementation project(":core-db-api")
     implementation project(":core-db-room-impl")
-//    implementation project(":core-network-tmdblib-impl")
 
     implementation project(":core-tab-host")
 

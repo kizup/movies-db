@@ -9,13 +9,12 @@ import com.example.moviesdb.network.model.TvShow
 import com.example.moviesdb.network.model.TvShowType
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
 import com.example.moviesdb.root.tab.navigation.ILocalNavigator
-import com.xwray.groupie.GroupieViewHolder
+import com.example.moviesdb.utils.ioToUi
+import com.example.moviesdb.utils.loading
 import com.xwray.groupie.kotlinandroidextensions.Item
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function4
-import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -28,10 +27,15 @@ class HomePresenter @Inject constructor(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        loadNowPlayingMovies()
+        loadContent()
     }
 
-    private fun loadNowPlayingMovies() {
+    override fun retry() {
+        super.retry()
+        loadContent()
+    }
+
+    private fun loadContent() {
         launch {
             Single.zip(
                 loadMovies(),
@@ -43,8 +47,8 @@ class HomePresenter @Inject constructor(
                     )
                 }
             )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .ioToUi()
+                .loading(viewState)
                 .subscribe({ data ->
                     viewState.setMoviesData(data)
                 }, this::handleError)
