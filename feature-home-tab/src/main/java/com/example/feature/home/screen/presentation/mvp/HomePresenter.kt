@@ -1,33 +1,30 @@
 package com.example.feature.home.screen.presentation.mvp
 
-import androidx.fragment.app.Fragment
 import com.example.feature.home.screen.presentation.model.*
 import com.example.feature.home.screen.presentation.view.IHomeView
-import com.example.feature.home.screen.presentation.view.TargetFragment
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.model.Movie
 import com.example.moviesdb.network.model.MovieType
 import com.example.moviesdb.network.model.TvShow
 import com.example.moviesdb.network.model.TvShowType
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
-import com.example.moviesdb.root.tab.di.scope.TabHostScope
 import com.example.moviesdb.root.tab.navigation.ILocalNavigator
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
+import com.xwray.groupie.kotlinandroidextensions.Item
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
-import ru.terrakok.cicerone.android.support.SupportAppScreen
 import javax.inject.Inject
 
 @InjectViewState
 class HomePresenter @Inject constructor(
-    private val tmdbClient: TheMovieDBClientApi,
-    @TabHostScope private val localNavigator: ILocalNavigator
+    private val tmdbClient: TheMovieDBClientApi
 ) : BasePresenter<IHomeView>() {
+
+    lateinit var localNavigator: ILocalNavigator
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -85,11 +82,6 @@ class HomePresenter @Inject constructor(
         )
     }
 
-    fun onItemClick(item: Item<GroupieViewHolder>) {
-        localNavigator.navigateTo(object : SupportAppScreen() {
-            override fun getFragment(): Fragment {
-                return TargetFragment()
-            }
-        })
+    fun onItemClick(item: Item) {
     }
 }

@@ -9,7 +9,6 @@ import com.example.moviesdb.root.tab.di.modules.NavigatorModule
 import com.example.moviesdb.root.tab.di.scope.TabHostScope
 import com.example.moviesdb.root.tab.navigation.ILocalNavigator
 import com.example.moviesdb.root.tab.presentation.mvp.HostPresenter
-import com.example.moviesdb.utils.findComponentDependencies
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -18,7 +17,6 @@ import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Command
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class HostFragment : BaseFragment<HostPresenter>(),
     IHostView {
@@ -51,7 +49,6 @@ class HostFragment : BaseFragment<HostPresenter>(),
 
     override fun performInject() {
         DaggerTabHostComponent.builder()
-            .tabHostDependencies(findComponentDependencies())
             .navigatorModule(NavigatorModule())
             .build()
             .inject(this)

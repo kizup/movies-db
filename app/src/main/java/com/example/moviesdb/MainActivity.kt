@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), HasComponentDependencies {
                 nextFragment: Fragment?,
                 fragmentTransaction: FragmentTransaction?
             ) {
-
+                fragmentTransaction?.setReorderingAllowed(true)
             }
         }
 
