@@ -1,6 +1,7 @@
 package com.example.moviesdb.movies.di
 
 import com.example.core.main.fragment.api.RootDependencies
+import com.example.core.main.fragment.di.RootNavigationModule
 import com.example.feature.home.screen.api.HomeDependencies
 import com.example.moviesdb.MainActivity
 import com.example.moviesdb.db.di.CoreDatabaseApiDependencies
@@ -16,7 +17,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         RetrofitNetworkModule::class,
-        ComponentDependenciesModule::class
+        ComponentDependenciesModule::class,
+        RootNavigationModule::class
     ]
 )
 @Singleton

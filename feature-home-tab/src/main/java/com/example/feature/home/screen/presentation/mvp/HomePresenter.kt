@@ -1,5 +1,6 @@
 package com.example.feature.home.screen.presentation.mvp
 
+import com.example.feature.home.screen.navigation.IHomeNavigation
 import com.example.feature.home.screen.presentation.model.*
 import com.example.feature.home.screen.presentation.view.IHomeView
 import com.example.moviesdb.network.api.TheMovieDBClientApi
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class HomePresenter @Inject constructor(
-    private val tmdbClient: TheMovieDBClientApi
+    private val tmdbClient: TheMovieDBClientApi,
+    private val homeNavigation: IHomeNavigation
 ) : BasePresenter<IHomeView>() {
 
     override fun onFirstViewAttach() {
@@ -84,5 +86,6 @@ class HomePresenter @Inject constructor(
     }
 
     fun onItemClick(item: Item) {
+        homeNavigation.toMoviesList()
     }
 }

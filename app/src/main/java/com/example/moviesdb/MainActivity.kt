@@ -26,4 +26,8 @@ class MainActivity : AppCompatActivity(), HasComponentDependencies {
             .inject(this)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+    }
+
 }

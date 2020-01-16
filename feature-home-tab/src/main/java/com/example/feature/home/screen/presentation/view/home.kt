@@ -2,6 +2,8 @@ package com.example.feature.home.screen.presentation.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feature.home.screen.R
@@ -21,6 +23,7 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import moxy.ktx.moxyPresenter
 import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 interface IHomeView : IBaseView, ILoadingView {
@@ -105,4 +108,5 @@ class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
             }
         }
     }
+
 }

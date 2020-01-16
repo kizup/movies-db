@@ -9,5 +9,13 @@
         tools:layout="@layout/fragment_home"
         android:id="@+id/homeFragment"
         android:name="com.example.feature.home.screen.presentation.view.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_moviesListFragment"
+            app:destination="@id/moviesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moviesListFragment"
+        android:name="com.example.moviesdb.movies.list.presentation.view.MoviesListFragment"
+        android:label="MoviesListFragment" />
 </navigation>

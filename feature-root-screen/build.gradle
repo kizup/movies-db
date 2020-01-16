@@ -33,6 +33,7 @@ android {
 dependencies {
     api project(":core-utils")
     implementation project(":feature-home-tab")
+    implementation project(":feature-movies-list")
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
