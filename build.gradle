@@ -25,6 +25,7 @@ buildscript {
             ahbottomnavigation: '2.3.4',
             glide             : '4.10.0',
             room              : '2.2.2',
+            navigation        : "2.2.0-rc04",
 
             multidex          : '2.0.1',
 
@@ -41,6 +42,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-rc02"
     }
 }
 

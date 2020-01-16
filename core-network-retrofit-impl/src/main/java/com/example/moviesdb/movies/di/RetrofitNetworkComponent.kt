@@ -1,4 +1,4 @@
-package com.example.moviesdb.movies.list.di
+package com.example.moviesdb.movies.di
 
 //@Component(
 //    modules = [RetrofitModule::class, RetrofitNetworkModule::class]

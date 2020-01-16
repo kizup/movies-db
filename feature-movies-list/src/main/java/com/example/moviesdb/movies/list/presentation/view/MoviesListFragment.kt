@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdb.movies.list.R
-import com.example.moviesdb.movies.list.di.DaggerMoviesListComponent
+import com.example.moviesdb.movies.di.DaggerMoviesListComponent
 import com.example.moviesdb.movies.list.presentation.mvp.MoviesListPresenter
 import com.example.moviesdb.presentation.view.base.BaseFragment
 import com.example.moviesdb.utils.findComponentDependencies
@@ -28,13 +28,10 @@ class MoviesListFragment : BaseFragment<MoviesListPresenter>(), IMoviesListView 
     override val layoutId: Int
         get() = R.layout.fragment_movies_list
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView(view: View, savedInstanceState: Bundle?) {
         rvMoviesList.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         }
     }
-
 }

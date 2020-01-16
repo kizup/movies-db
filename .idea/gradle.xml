@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/core-db-room-impl" />
             <option value="$PROJECT_DIR$/core-network-api" />
             <option value="$PROJECT_DIR$/core-network-retrofit-impl" />
-            <option value="$PROJECT_DIR$/core-tab-host" />
             <option value="$PROJECT_DIR$/core-utils" />
             <option value="$PROJECT_DIR$/feature-home-tab" />
             <option value="$PROJECT_DIR$/feature-movies-list" />

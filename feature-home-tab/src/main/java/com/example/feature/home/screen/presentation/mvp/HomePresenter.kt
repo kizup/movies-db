@@ -8,7 +8,6 @@ import com.example.moviesdb.network.model.MovieType
 import com.example.moviesdb.network.model.TvShow
 import com.example.moviesdb.network.model.TvShowType
 import com.example.moviesdb.presentation.mvp.base.BasePresenter
-import com.example.moviesdb.root.tab.navigation.ILocalNavigator
 import com.example.moviesdb.utils.ioToUi
 import com.example.moviesdb.utils.loading
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -22,8 +21,6 @@ import javax.inject.Inject
 class HomePresenter @Inject constructor(
     private val tmdbClient: TheMovieDBClientApi
 ) : BasePresenter<IHomeView>() {
-
-    lateinit var localNavigator: ILocalNavigator
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

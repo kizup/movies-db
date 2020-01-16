@@ -1,11 +1,10 @@
-package com.example.moviesdb.movies.list.di
+package com.example.moviesdb.movies.di
 
 import com.example.core.main.fragment.api.RootDependencies
 import com.example.feature.home.screen.api.HomeDependencies
 import com.example.moviesdb.MainActivity
 import com.example.moviesdb.db.di.CoreDatabaseApiDependencies
 import com.example.moviesdb.movies.list.api.MoviesListDependencies
-import com.example.moviesdb.movies.list.di.modules.NavigatorModule
 import com.example.moviesdb.utils.ComponentDependencies
 import com.example.moviesdb.utils.ComponentDependenciesKey
 import dagger.Binds
@@ -17,8 +16,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         RetrofitNetworkModule::class,
-        ComponentDependenciesModule::class,
-        NavigatorModule::class
+        ComponentDependenciesModule::class
     ]
 )
 @Singleton

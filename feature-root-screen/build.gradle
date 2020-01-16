@@ -2,10 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion rootProject.compile_sdk_version
     buildToolsVersion rootProject.build_tools_version
-
 
     defaultConfig {
         minSdkVersion rootProject.min_sdk_version
@@ -30,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation project(":core-tab-host")
+    api project(":core-utils")
     implementation project(":feature-home-tab")
 
     // Dagger
@@ -40,6 +41,6 @@ dependencies {
     // Moxy
     kapt "com.github.moxy-community:moxy-compiler:${versions.moxy}"
 
-    // Navigation
+    // Bottom Navigation
     implementation "com.aurelhubert:ahbottomnavigation:${versions.ahbottomnavigation}"
 }

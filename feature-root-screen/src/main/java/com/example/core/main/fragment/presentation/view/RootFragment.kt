@@ -1,18 +1,17 @@
 package com.example.core.main.fragment.presentation.view
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
-import com.example.core.main.Screens
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.navigation.ui.setupWithNavController
 import com.example.core.main.fragment.R
 import com.example.core.main.fragment.di.DaggerRootComponent
 import com.example.core.main.fragment.presentation.mvp.RootPresenter
+import com.example.core.main.utils.setupWithNavController
 import com.example.moviesdb.presentation.view.base.BaseFragment
-import com.example.moviesdb.root.tab.presentation.view.HostFragment
 import com.example.moviesdb.utils.findComponentDependencies
-import kotlinx.android.synthetic.main.fragment_main.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import moxy.ktx.moxyPresenter
-import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class RootFragment : BaseFragment<RootPresenter>() {
 
@@ -27,85 +26,18 @@ class RootFragment : BaseFragment<RootPresenter>() {
     override val layoutId: Int
         get() = R.layout.fragment_main
 
-    private val currentTabFragment: HostFragment?
-        get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? HostFragment
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        AHBottomNavigationAdapter(activity, R.menu.main_bottom_menu).apply {
-            setupWithBottomNavigation(bottomBar)
+    override fun initView(view: View, savedInstanceState: Bundle?) {
+        with(view.findViewById<BottomNavigationView>(R.id.bottomBar)) {
+            val navGraphIds = listOf(
+                R.navigation.home,
+                R.navigation.search,
+                R.navigation.trailers,
+                R.navigation.account
+            )
+            setupWithNavController(navGraphIds, childFragmentManager, R.id.mainScreenContainer)
+                .observe(this@RootFragment, Observer { navController ->
+//                    setupWithNavController(navController)
+                })
         }
-        with(bottomBar) {
-            accentColor = ContextCompat.getColor(context, R.color.color_red_rose)
-            inactiveColor = ContextCompat.getColor(context, R.color.color_inactive)
-
-            setOnTabSelectedListener { position, wasSelected ->
-                if (!wasSelected) selectTab(
-                    when (position) {
-                        0 -> homeTab
-                        1 -> searchTab
-                        2 -> trailersTab
-                        3 -> accountTab
-                        else -> homeTab
-                    }
-                )
-                true
-            }
-        }
-
-        selectTab(
-            when (currentTabFragment?.tag) {
-                homeTab.screenKey -> homeTab
-                searchTab.screenKey -> searchTab
-                trailersTab.screenKey -> trailersTab
-                accountTab.screenKey -> accountTab
-                else -> homeTab
-            }
-        )
-    }
-
-    override fun onBackPressed() {
-        currentTabFragment?.onBackPressed() ?: super.onBackPressed()
-    }
-
-    private fun createTabFragment(tab: SupportAppScreen): HostFragment {
-        return HostFragment()
-    }
-
-    private fun selectTab(tab: SupportAppScreen) {
-
-        val currentFragment = currentTabFragment
-        val newFragment = childFragmentManager.findFragmentByTag(tab.screenKey)
-
-        if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
-
-        var needSetupRootScreenInHost = false
-        childFragmentManager.beginTransaction().apply {
-            if (newFragment == null) {
-                add(R.id.mainScreenContainer, createTabFragment(tab), tab.screenKey)
-                needSetupRootScreenInHost = true
-            }
-
-            currentFragment?.let {
-                hide(it)
-                it.userVisibleHint = false
-            }
-            newFragment?.let {
-                show(it)
-                it.userVisibleHint = true
-            }
-        }.commitNow()
-
-        if (needSetupRootScreenInHost) {
-            currentTabFragment?.localSetRoot(tab)
-        }
-    }
-
-    companion object {
-        private val homeTab = Screens.Home
-        private val searchTab = Screens.Search
-        private val trailersTab = Screens.Trailers
-        private val accountTab = Screens.Account
     }
 }

@@ -1,4 +1,4 @@
-package com.example.moviesdb.movies.list.di
+package com.example.moviesdb.movies.di
 
 import com.example.moviesdb.network.api.TheMovieDBClientApi
 import com.example.moviesdb.network.impl.retrofit.TheMovieDBClientApiImpl

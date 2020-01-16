@@ -12,16 +12,14 @@ import com.example.feature.home.screen.presentation.model.HomeTabScreenData
 import com.example.feature.home.screen.presentation.model.SpaceItem
 import com.example.feature.home.screen.presentation.mvp.HomePresenter
 import com.example.feature.home.screen.utils.plusAssign
+import com.example.moviesdb.presentation.view.base.BaseFragment
 import com.example.moviesdb.presentation.view.base.IBaseView
 import com.example.moviesdb.presentation.view.base.ILoadingView
-import com.example.moviesdb.root.tab.presentation.view.HostChildFragment
 import com.example.moviesdb.utils.findComponentDependencies
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import moxy.ktx.moxyPresenter
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
@@ -32,7 +30,7 @@ interface IHomeView : IBaseView, ILoadingView {
 
 }
 
-class HomeFragment : HostChildFragment<HomePresenter>(), IHomeView {
+class HomeFragment : BaseFragment<HomePresenter>(), IHomeView {
 
     override fun performInject() {
         DaggerHomeComponent
@@ -43,7 +41,7 @@ class HomeFragment : HostChildFragment<HomePresenter>(), IHomeView {
     }
 
     private val presenter: HomePresenter
-            by moxyPresenter { lazyPresenter.get().apply { localNavigator = parentNavigator } }
+            by moxyPresenter { lazyPresenter.get() }
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy {
@@ -55,9 +53,7 @@ class HomeFragment : HostChildFragment<HomePresenter>(), IHomeView {
     override val layoutId: Int
         get() = R.layout.fragment_home
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView(view: View, savedInstanceState: Bundle?) {
         linearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         initRecyclerView()
     }

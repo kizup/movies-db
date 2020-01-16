@@ -24,6 +24,7 @@ abstract class BaseFragment<Presenter: BasePresenter<*>> : MvpAppCompatFragment(
 
     abstract val layoutId: Int
     abstract fun performInject()
+    abstract fun initView(view: View, savedInstanceState: Bundle?)
 
     private var errorLoadContainer: ViewGroup? = null
 
@@ -37,11 +38,13 @@ abstract class BaseFragment<Presenter: BasePresenter<*>> : MvpAppCompatFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(layoutId, container, false)
+        val view = inflater.inflate(layoutId, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView(view, savedInstanceState)
         initErrorRetryContainer(view)
     }
 

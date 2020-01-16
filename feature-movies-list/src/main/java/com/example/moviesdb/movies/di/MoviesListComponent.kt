@@ -1,4 +1,4 @@
-package com.example.moviesdb.movies.list.di
+package com.example.moviesdb.movies.di
 
 import com.example.moviesdb.movies.list.api.MoviesListDependencies
 import com.example.moviesdb.movies.list.presentation.view.MoviesListFragment
